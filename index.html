@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      transition: all 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-top: 40px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* Countdown */
+    #countdown {
+      font-size: 1.5rem;
+      margin: 20px 0;
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      margin: 10px;
+      background: #ff4d6d;
+      color: #fff;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background: #e63950;
+    }
+
+    /* Card (Surat) */
+    .card {
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.5s ease-in-out;
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Gallery */
+    .gallery {
+      display: none;
+      margin: 30px auto;
+      max-width: 600px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+      animation: fadeIn 2s;
+    }
+
+    /* Gift */
+    .gift {
+      display: none;
+      margin-top: 30px;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    /* Balon Game */
+    .balloon {
+      position: absolute;
+      font-size: 2rem;
+      cursor: pointer;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { top: 100vh; opacity: 0; }
+      20% { opacity: 1; }
+      100% { top: -10vh; opacity: 0; }
+    }
+
+    /* Tema Misterius (sebelum tanggal) */
+    body.dark {
+      background: black;
+      color: #fff;
+    }
+
+    body.dark h1, body.dark .subtitle, body.dark #countdown {
+      color: #fff;
+    }
+
+    body.dark #countdown {
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Tema Ceria (ulang tahun) */
+    body.birthday {
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      color: #333;
+    }
+
+    body.birthday #countdown {
+      background: rgba(255,255,255,0.6);
+    }
+
+    /* Ikon rahasia */
+    #secretBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: 0.3s;
+    }
+
+    #secretBtn:hover {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+
+    /* Popup */
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .popup.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .popup-content {
+      background: #fff;
+      color: #333;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 500px;
+      text-align: center;
+      animation: popUp 0.5s ease;
+    }
+
+    @keyframes popUp {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .close {
+      margin-top: 15px;
+      display: inline-block;
+      padding: 6px 14px;
+      background: crimson;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .music-player {
+      display: inline-block;
+      background: #ffe0e0;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    #judul-lagu {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    button {
+      background-color: #ff5c77;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #e14b66;
+    }
+  </style>
+</head>
+<body class="dark">
+  <h1 id="title">🔒 Sebuah kejutan menantimu...</h1>
+  <p id="subtitle" class="subtitle">Tunggu hingga waktunya tiba...</p>
+
+  <!-- Countdown -->
+  <div id="countdown"></div>
+
+  <!-- Konten Hadiah (hanya muncul di 23 September) -->
+  <div id="content" style="display:none;">
+    <h1>🎉 METT ULTAAHHH, Alya Al-Khalifi Wulandari! 🎂</h1>
+    <p class="subtitle">Ultahh yaaa XD ✨</p>
+
+    <a class="button" onclick="showCard()">Buka Surat Ucapan</a>
+    <a class="button" onclick="startGame()">Mainkan Balon 🎈</a>
+    <a class="button" onclick="showGift()">Buka Kado 🎁</a>
+
+    <!-- Audio dari folder -->
+    <div class="music-player">
+    <div id="judul-lagu">Tidak ada lagu yang diputar</div>
+    <button onclick="playSong('song/perfect.mp3', 'Perfect - Ed Sheeran')">▶ Lagu 1</button>
+    <button onclick="playSong('song/Best.mp3', 'Best Friend - Rex Orange County')">▶ Lagu 2</button>
+    <button onclick="playSong('lagu3.mp3', 'Lagu Ketiga')">▶ Lagu 3</button>
+    <button onclick="playSong('lagu3.mp3', 'Nothing')">▶ Hentikan Lagu</button>
+    </div>
+
+  <audio id="audio-player" controls style="display:none;"></audio>
+
+    <!-- Surat -->
+    <div id="card" class="card">
+      <h2>Pesan 💖</h2>
+      <p>
+        SELAMAT ULANG TAHUN MELLL 🥳🥳
+        YAHAHAHA TUA :3  😂
+        PANJANG UMUR YAAA, SEHATT SELALUU, MOGA MAKIN CANTIK, IMUT, SOLEHAH, PNTER, SUKSES, SAYANG AMA ORANG TUAAA 
+        sowwii kalau aku ada salah atau kata-kata yang bikin kamu sakit hati.
+        trus jangan sakit-sakitan trus, ntar aku khawatir :3
+        <br>
+        <br>
+        -Fajri
+        <br>
+        <br>
+        Selamat ulang tahun, Alya 🎉🥳 Semoga panjang umur, sehat selalu, dan makin sukses 
+        dalam segala hal (ucapan langsung dari ketua lohh 😎😎). Terus semoga betah menjadi 
+        wakil juga kalau bisa bantuan ketua juga yak hahay, Wish you all the best 🔥.
+        <br>
+        <br>
+        -keanu
+
+
+      </p>
+    </div>
+
+    <div class=" button">
+    <h2>💡 Kata-kata :3</h2>
+    <p id="quote">-</p>
+    <button onclick="generateQuote()">Klik disini</button>
+    </div>
+
+    <!-- Gift -->
+    <div id="gift" class="gift" onclick="revealGift()">🎁</div>
+    <div id="giftMessage" style="display:none; font-size:1.4rem; margin-top:20px; background:white; padding:20px; border-radius:15px; max-width:500px; margin-left:auto; margin-right:auto;">
+      Kado?  
+      <br>
+      chat ke si fajri tulisnya
+      <br>
+      "41 6B 75 20 6D 61 75 20 73 75 73 75 20 63 6F 6B 6C 61 74 20 6C 61 6E 64 61 6B 6B 20 69 6D 75 74" 
+    </div>
+  </div>
+
+  
+
+  <audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"></audio>
+  <!-- <div id="secretBtn">❤️</div>
+
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2> Cius (jujur)</h2>
+      <p>uy yaa, kalo kamu ngeliat aku sering murung mulu <br>
+      itu bisa aja jeles atau lagi ga enak badan (serius ini mah)
+      trus juga emang dari lama ga enak aja kalo kita statusnya bestie soalnya 
+      sering ovt trus kalo kamu bakal ama yang lain gara-gara aku ada kurang, <br>
+      trus juga susah banget buat itu soalnya kita udah janji (kayaknya) kalo 
+      kelas 12 aku mau serius. trus juga ada yang nanyain "emang kamu sama si alya 
+      mau bestian terus??" cewe btw, aku juga aga gimana gitu. tapi dari cara kamu <br>
+      di sekolah atau diluar, masih kayak nerima aku juga. aku malahan setuju sama 
+      lega aja. sering juga sih, aku ovt gitu mau di sekolah, kerkom, sama di rumah 
+      gara gara itu. takutnya kamu diambil gara gara status kita besti. moga bisa dimengerti yaa <br>
+      . HBD comell :D
+      <br>
+      -Landak</p>
+      <div class="close" id="closeBtn">Tutup</div>
+    </div>
+  </div> -->
+
+  <script>
+    // Surat
+    function showCard() {
+      document.getElementById("card").classList.add("show");
+      document.getElementById("bgMusic").play();
+    }
+
+    // Gift
+    function showGift() {
+      document.getElementById("gift").style.display = "block";
+    }
+    function revealGift() {
+      document.getElementById("gift").style.display = "none";
+      document.getElementById("giftMessage").style.display = "block";
+    }
+
+    // Game Balon
+    function startGame() {
+      for (let i = 0; i < 10; i++) {
+        let balloon = document.createElement("div");
+        balloon.innerHTML = "🎈";
+        balloon.classList.add("balloon");
+        balloon.style.left = Math.random() * 90 + "vw";
+        balloon.style.top = "100vh";
+        balloon.style.animationDuration = (4 + Math.random() * 3) + "s";
+        balloon.onclick = function() {
+          alert("Selamat ulang tahun! 💕");
+          balloon.remove();
+        };
+        document.body.appendChild(balloon);
+      }
+    }
+
+    // Countdown & Switch Tema
+    const targetDate = new Date("September 2, 2025 00:00:00").getTime();
+    const countdown = document.getElementById("countdown");
+    const content = document.getElementById("content");
+    const title = document.getElementById("title");
+    const subtitle = document.getElementById("subtitle");
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        // Ulang Tahun: ubah tema ke ceria
+        document.body.classList.remove("dark");
+        document.body.classList.add("birthday");
+        countdown.innerHTML = "🎂 Hari ini ulang tahunmu! 🎉";
+        content.style.display = "block";
+        if (title) title.style.display = "none";
+        if (subtitle) subtitle.style.display = "none";
+      } else {
+        // Misterius
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdown.innerHTML = `⏳ ${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik menuju 23 September 🎉`;
+        content.style.display = "none";
+      }
+    }, 1000);
+
+    // const secretBtn = document.getElementById("secretBtn");
+    // const popup = document.getElementById("popup");
+    // const closeBtn = document.getElementById("closeBtn");
+
+    // secretBtn.addEventListener("click", () => {
+    //   popup.classList.add("active");
+    // });
+
+    // closeBtn.addEventListener("click", () => {
+    //   popup.classList.remove("active");
+    // });
+
+    // // Tutup popup kalau klik luar konten
+    // popup.addEventListener("click", (e) => {
+    //   if (e.target === popup) {
+    //     popup.classList.remove("active");
+    //   }
+    // });
+
+
+    // kata kata //
+
+    const quotes = [
+    "Ga butuh kata-kata, senyuman si comel aja udah puas",
+    "Tau lagu 'I say little pray for you?', lagu itu menceritakan tentang aku mengucapkan sedikit doa untuk kita bisa bertemu",
+    "Suka suka lo deh, eh tapi emang suka :3",
+    "bukan muji, tapi hari ini kamu imut dehh",
+    "ALYA = As Long You Awesome, i like it :)",
+    "Jujur males sekolahh, tapi gapapa kalau kamu masuk jadi ga males"
+  ];
+
+  function generateQuote() {
+    const random = Math.floor(Math.random() * quotes.length);
+    document.getElementById("quote").innerText = quotes[random];
+  } 
+
+//   Lagu //
+    const audioPlayer = document.getElementById("audio-player");
+    const judulLagu = document.getElementById("judul-lagu");
+
+    function playSong(file, title) {
+      audioPlayer.src = file;
+      audioPlayer.play();
+      judulLagu.textContent = "Sedang diputar: " + title;
+    }
+  </script>
+</body>
+</html>
