@@ -225,6 +225,53 @@
     button:hover {
       background-color: #e14b66;
     }
+
+    .cake {
+      position: relative;
+      width: 150px;
+      height: 100px;
+      background: #ff6f91;
+      margin: 50px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .candle {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 15px;
+      height: 60px;
+      background: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .flame {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 30px;
+      background: radial-gradient(circle, yellow 40%, orange 70%, transparent 100%);
+      border-radius: 50%;
+      animation: flicker 0.3s infinite alternate;
+    }
+
+    @keyframes flicker {
+      from { transform: translateX(-50%) scale(1); }
+      to { transform: translateX(-50%) scale(1.1); }
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      display: none;
+    }
   </style>
 </head>
 <body class="dark">
@@ -247,22 +294,23 @@
     <div class="music-player">
     <div id="judul-lagu">Tidak ada lagu yang diputar</div>
     <button onclick="playSong('song/perfect.mp3', 'Perfect - Ed Sheeran')">▶ Lagu 1</button>
-    <button onclick="playSong('song/Best.mp3', 'Best Friend - Rex Orange County')">▶ Lagu 2</button>
-    <button onclick="playSong('lagu3.mp3', 'Lagu Ketiga')">▶ Lagu 3</button>
-    <button onclick="playSong('lagu3.mp3', 'Nothing')">▶ Hentikan Lagu</button>
+    <button onclick="playSong('song/jadianyuk.mp3', 'Jadian Yuk - Chloe Pawapua')">▶ Lagu 2</button>
+    <button onclick="playSong('song/Until.mp3', 'Until I Found You - Stephen Sanchez')">▶ Lagu 3</button>
+    <button onclick="playSong('lagu3.mp3', 'Mati')">▶ Hentikan Lagu</button>
     </div>
 
   <audio id="audio-player" controls style="display:none;"></audio>
 
     <!-- Surat -->
     <div id="card" class="card">
-      <h2>Pesan 💖</h2>
+      <h2>Ucapan</h2>
       <p>
-        SELAMAT ULANG TAHUN MELLL 🥳🥳
+        HAABEEEDEEE MELLL 🥳🥳
         YAHAHAHA TUA :3  😂
         PANJANG UMUR YAAA, SEHATT SELALUU, MOGA MAKIN CANTIK, IMUT, SOLEHAH, PNTER, SUKSES, SAYANG AMA ORANG TUAAA 
         sowwii kalau aku ada salah atau kata-kata yang bikin kamu sakit hati.
-        trus jangan sakit-sakitan trus, ntar aku khawatir :3
+        trus jangan sakit-sakitan trus, ntar aku khawatir
+        ntar lah kalo ada duit aku beliin susu coklat lagi :3.
         <br>
         <br>
         -Fajri
@@ -290,15 +338,15 @@
     <div id="giftMessage" style="display:none; font-size:1.4rem; margin-top:20px; background:white; padding:20px; border-radius:15px; max-width:500px; margin-left:auto; margin-right:auto;">
       Kado?  
       <br>
-      chat ke si fajri tulisnya
+      kasih liat fajri kalimat ini:
       <br>
-      "41 6B 75 20 6D 61 75 20 73 75 73 75 20 63 6F 6B 6C 61 74 20 6C 61 6E 64 61 6B 6B 20 69 6D 75 74" 
+      "47 61 6E 63 69 6E 79 61 20 6D 61 6E 61 20 69 6D 75 74 74" 
     </div>
   </div>
 
   
 
-  <audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"></audio>
+  <!-- <audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"></audio> -->
   <!-- <div id="secretBtn">❤️</div>
 
   <div class="popup" id="popup">
@@ -313,7 +361,9 @@
       mau bestian terus??" cewe btw, aku juga aga gimana gitu. tapi dari cara kamu <br>
       di sekolah atau diluar, masih kayak nerima aku juga. aku malahan setuju sama 
       lega aja. sering juga sih, aku ovt gitu mau di sekolah, kerkom, sama di rumah 
-      gara gara itu. takutnya kamu diambil gara gara status kita besti. moga bisa dimengerti yaa <br>
+      gara gara itu. takutnya kamu diambil gara gara status kita besti. 
+      maaf kalo misal aku ada kurang trus bakal aku tingkatin biar aku bisa deket
+      sama kamu, moga bisa dimengerti yaa <br>
       . HBD comell :D
       <br>
       -Landak</p>
@@ -347,7 +397,7 @@
         balloon.style.top = "100vh";
         balloon.style.animationDuration = (4 + Math.random() * 3) + "s";
         balloon.onclick = function() {
-          alert("Selamat ulang tahun! 💕");
+          alert("HABEDE COMELL!");
           balloon.remove();
         };
         document.body.appendChild(balloon);
@@ -355,7 +405,7 @@
     }
 
     // Countdown & Switch Tema
-    const targetDate = new Date("September 4, 2025 00:00:00").getTime();
+    const targetDate = new Date("September 2, 2025 00:00:00").getTime();
     const countdown = document.getElementById("countdown");
     const content = document.getElementById("content");
     const title = document.getElementById("title");
@@ -413,7 +463,9 @@
     "Suka suka lo deh, eh tapi emang suka :3",
     "bukan muji, tapi hari ini kamu imut dehh",
     "ALYA = As Long You Awesome, i like it :)",
-    "Jujur males sekolahh, tapi gapapa kalau kamu masuk jadi ga males"
+    "Jujur males sekolahh, tapi gapapa kalau kamu masuk jadi ga males",
+    "Aku lebih suka Waktu Indonesia Timur, karena i want to be WIT you",
+    "Hidup itu ambil fun aja, tapi kalo aku mending ambil kamu"
   ];
 
   function generateQuote() {
@@ -433,5 +485,3 @@
   </script>
 </body>
 </html>
-
-
