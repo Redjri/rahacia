@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Happy Birthday!</title>
+  <title>?</title>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
@@ -250,24 +250,6 @@
       border: 2px solid #ff6f91;
     }
 
-    /* Balon Game */
-    .balloon {
-      position: fixed;
-      font-size: 3rem;
-      cursor: pointer;
-      animation-timing-function: linear;
-      user-select: none;
-      filter: drop-shadow(0 3px 3px rgba(0,0,0,0.15));
-      will-change: transform, opacity;
-      z-index: 999;
-      user-select: none;
-    }
-    @keyframes floatUp {
-      0% { transform: translateY(100vh) scale(1); opacity: 0; }
-      20% { opacity: 1; }
-      100% { transform: translateY(-15vh) scale(1.1); opacity: 0; }
-    }
-
     /* Tema Misterius (sebelum tanggal) */
     body.dark {
       background: linear-gradient(135deg, #2c003e, #5a005a);
@@ -387,43 +369,7 @@
       box-shadow: 0 12px 35px rgba(255, 77, 109, 0.6);
       user-select: none;
     }
-    .candle {
-      position: absolute;
-      top: -75px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 20px;
-      height: 75px;
-      background: #fff;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
-      filter: drop-shadow(0 0 5px #ffb347);
-      transition: filter 0.3s ease;
-    }
-    .candle:hover {
-      filter: drop-shadow(0 0 18px #ffd966);
-    }
-    .flame {
-      position: absolute;
-      top: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 28px;
-      height: 40px;
-      background: radial-gradient(circle at 50% 50%, #fff176 40%, #ffb347 75%, transparent 100%);
-      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      animation: flicker 0.4s infinite alternate ease-in-out;
-      filter: drop-shadow(0 0 8px #ffd966);
-      pointer-events: none;
-      user-select: none;
-      box-shadow: 0 0 12px #fff176;
-    }
-    @keyframes flicker {
-      0% { transform: translateX(-50%) scale(1); opacity: 1; }
-      100% { transform: translateX(-50%) scale(1.2); opacity: 0.85; }
-    }
-
+  
     /* Message */
     .message {
       margin-top: 25px;
@@ -497,8 +443,6 @@
   </style>
 </head>
 <body class="dark">
-  <button id="darkToggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode">🌙</button>
-
   <h1 id="title">🔒...</h1>
   <p id="subtitle" class="subtitle">Tunggu hari itu tiba...</p>
 
@@ -711,4 +655,3 @@ function closeGallery() {
   </script>
 </body>
 </html>
-
