@@ -1,319 +1,497 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>?</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
-      padding: 0;
-      font-family: "Poppins", sans-serif;
+      padding: 0 15px 50px;
+      font-family: 'Baloo 2', cursive, sans-serif;
       text-align: center;
-      transition: all 1s ease-in-out;
+      transition: background 1s ease, color 1s ease;
+      background: #fff0f5;
+      color: #5a2a3a;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 60px;
     }
 
-    h1 {
-      font-size: 3rem;
-      margin-top: 40px;
-      animation: fadeIn 2s ease-in-out;
+    h1, h2 {
+      margin: 0.5em 0;
+      text-shadow: 0 2px 6px rgba(255 182 193 / 0.6);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    h1#title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      color: #d6336c;
+      text-shadow:
+        0 0 5px #ff6f91,
+        0 0 10px #ff6f91,
+        0 0 20px #ff4d6d,
+        0 0 30px #ff4d6d;
+      animation: glowPulse 3s ease-in-out infinite alternate;
+    }
+    @keyframes glowPulse {
+      0% {
+        text-shadow:
+          0 0 5px #ff6f91,
+          0 0 10px #ff6f91,
+          0 0 20px #ff4d6d,
+          0 0 30px #ff4d6d;
+      }
+      100% {
+        text-shadow:
+          0 0 10px #ff4d6d,
+          0 0 20px #ff4d6d,
+          0 0 30px #ff6f91,
+          0 0 40px #ff6f91;
+      }
     }
 
-    .subtitle {
-      font-size: 1.5rem;
-      margin-bottom: 30px;
-      animation: fadeIn 3s ease-in-out;
+    p.subtitle {
+      font-size: 1.4rem;
+      margin-bottom: 2em;
+      opacity: 0.9;
+      font-weight: 600;
+      color: #a8325a;
+      text-shadow: 0 1px 3px rgba(255 182 193 / 0.7);
+      font-style: italic;
     }
 
+    /* Fade in animation */
     @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    h1, .subtitle {
+      animation: fadeIn 2s ease forwards;
     }
 
     /* Countdown */
     #countdown {
       font-size: 1.5rem;
-      margin: 20px 0;
+      margin: 20px auto 50px;
       display: inline-block;
-      padding: 10px 20px;
-      border-radius: 10px;
+      padding: 18px 40px;
+      border-radius: 40px;
+      background: rgba(255 182 193 / 0.3);
+      box-shadow: 0 0 25px rgba(255 105 180 / 0.4);
+      user-select: none;
+      min-width: 320px;
+      max-width: 90vw;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #b2224a;
+      font-family: 'Baloo 2', cursive;
+      text-shadow: 0 0 5px #ff4d6d;
+      animation: fadeIn 2.5s ease forwards;
     }
 
+    /* Buttons */
     .button {
+      position: relative;
       display: inline-block;
-      padding: 12px 24px;
-      margin: 10px;
-      background: #ff4d6d;
+      padding: 16px 36px;
+      margin: 12px 14px;
+      background: linear-gradient(135deg, #ff4d6d, #ff6f91);
       color: #fff;
-      font-size: 1.1rem;
-      border-radius: 30px;
+      font-size: 1.2rem;
+      border-radius: 50px;
       cursor: pointer;
-      transition: 0.3s;
+      overflow: hidden;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.6);
+      user-select: none;
+      font-weight: 800;
       text-decoration: none;
+      outline-offset: 4px;
+      font-family: 'Baloo 2', cursive;
+      letter-spacing: 0.05em;
     }
-
-    .button:hover {
-      background: #e63950;
+    .button:hover, .button:focus {
+      background: linear-gradient(135deg, #ff6f91, #ff4d6d);
+      box-shadow: 0 10px 30px rgba(255, 105, 180, 0.8);
+      outline: none;
+      color: #fff;
+      transform: translateY(-3px);
+    }
+    /* Ripple effect */
+    .button::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255,255,255,0.5) 10%, transparent 10.01%);
+      background-repeat: no-repeat;
+      background-position: 50%;
+      transform: scale(10,10);
+      opacity: 0;
+      transition: transform 0.5s, opacity 1s;
+    }
+    .button:active::after {
+      transform: scale(0,0);
+      opacity: 0.3;
+      transition: 0s;
     }
 
     /* Card (Surat) */
     .card {
-      max-width: 500px;
-      margin: 40px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      max-width: 540px;
+      margin: 40px auto 60px;
+      padding: 30px 35px;
+      background: #fff0f6;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(255, 105, 180, 0.25);
+      color: #6a2c4a;
       opacity: 0;
-      transform: scale(0.8);
-      transition: all 0.5s ease-in-out;
+      transform: scale(0.9);
+      transition: all 0.6s ease-in-out;
+      line-height: 1.6;
+      font-size: 1.15rem;
+      user-select: text;
+      font-family: 'Baloo 2', cursive;
+      border: 2px solid #ff6f91;
     }
-
     .card.show {
       opacity: 1;
       transform: scale(1);
     }
-
-    /* Gallery */
-    .gallery {
-      display: none;
-      margin: 30px auto;
-      max-width: 600px;
+    .card h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.4rem;
+      color: #d6336c;
+      margin-bottom: 0.5em;
+      text-shadow: 0 0 8px #ff4d6d;
+    }
+    .card p {
+      white-space: pre-line;
+      font-weight: 600;
     }
 
-    .gallery img {
-      width: 100%;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      margin-bottom: 20px;
-      animation: fadeIn 2s;
+    /* Quote box */
+    .quote-box {
+      max-width: 540px;
+      margin: 30px auto 60px;
+      background: #ffe6f0;
+      border-radius: 25px;
+      padding: 25px 35px;
+      box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+      color: #b2224a;
+      font-style: italic;
+      font-size: 1.3rem;
+      user-select: none;
+      font-family: 'Baloo 2', cursive;
+      letter-spacing: 0.03em;
+    }
+    .quote-box button {
+      margin-top: 20px;
+      background: #b2224a;
+      box-shadow: 0 6px 18px rgba(178, 34, 74, 0.7);
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 14px 32px;
+      border-radius: 50px;
+      cursor: pointer;
+      color: white;
+      border: none;
+      transition: background 0.3s ease;
+    }
+    .quote-box button:hover {
+      background: #ff4d6d;
+      box-shadow: 0 8px 25px rgba(255, 77, 109, 0.9);
     }
 
     /* Gift */
     .gift {
       display: none;
-      margin-top: 30px;
-      font-size: 2rem;
+      margin: 30px auto 40px;
+      font-size: 4rem;
       cursor: pointer;
+      user-select: none;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 0 8px #ff4d6d);
+    }
+    .gift:hover {
+      transform: scale(1.3) rotate(15deg);
+      filter: drop-shadow(0 0 15px #ff6f91);
+    }
+    #giftMessage {
+      max-width: 540px;
+      margin: 20px auto 60px;
+      background: #fff0f6;
+      padding: 30px 35px;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(255, 105, 180, 0.25);
+      font-size: 1.4rem;
+      color: #6a2c4a;
+      user-select: text;
+      line-height: 1.5;
+      font-family: 'Baloo 2', cursive;
+      border: 2px solid #ff6f91;
     }
 
     /* Balon Game */
     .balloon {
-      position: absolute;
-      font-size: 2rem;
+      position: fixed;
+      font-size: 3rem;
       cursor: pointer;
-      animation: floatUp 6s linear infinite;
+      animation-timing-function: linear;
+      user-select: none;
+      filter: drop-shadow(0 3px 3px rgba(0,0,0,0.15));
+      will-change: transform, opacity;
+      z-index: 999;
+      user-select: none;
     }
-
     @keyframes floatUp {
-      0% { top: 100vh; opacity: 0; }
+      0% { transform: translateY(100vh) scale(1); opacity: 0; }
       20% { opacity: 1; }
-      100% { top: -10vh; opacity: 0; }
+      100% { transform: translateY(-15vh) scale(1.1); opacity: 0; }
     }
 
     /* Tema Misterius (sebelum tanggal) */
     body.dark {
-      background: black;
-      color: #fff;
+      background: linear-gradient(135deg, #2c003e, #5a005a);
+      color: #f0e6f7;
     }
-
-    body.dark h1, body.dark .subtitle, body.dark #countdown {
-      color: #fff;
+    body.dark h1#title {
+      color: #ffb6c1;
+      text-shadow:
+        0 0 8px #ffb6c1,
+        0 0 15px #ff69b4,
+        0 0 25px #ff1493;
     }
-
+    body.dark p.subtitle {
+      color: #f8bbd0;
+      text-shadow: 0 0 5px #ff69b4;
+    }
     body.dark #countdown {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255 182 193 / 0.15);
+      box-shadow: 0 0 20px rgba(255 105 180 / 0.3);
+      color: #ffb6c1;
+      text-shadow: 0 0 8px #ff69b4;
     }
 
     /* Tema Ceria (ulang tahun) */
     body.birthday {
       background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      color: #333;
+      color: #6a2c4a;
+      overflow-x: hidden;
     }
-
     body.birthday #countdown {
-      background: rgba(255,255,255,0.6);
+      background: rgba(255 182 193 / 0.7);
+      box-shadow: 0 0 30px rgba(255 105 180 / 0.6);
+      color: #6a2c4a;
+      text-shadow: 0 0 10px #d6336c;
     }
 
-    /* Ikon rahasia */
-    #secretBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      font-size: 28px;
-      cursor: pointer;
-      opacity: 0.6;
-      transition: 0.3s;
-    }
-
-    #secretBtn:hover {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-
-    /* Popup */
-    .popup {
+    /* Confetti container */
+    #confetti {
       position: fixed;
       top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
+      width: 100vw;
+      height: 100vh;
       pointer-events: none;
-      transition: opacity 0.5s ease;
+      z-index: 9999;
+      overflow: visible;
+    }
+    .confetti-piece {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background-color: #ff4d6d;
+      opacity: 0.9;
+      border-radius: 4px;
+      will-change: transform, opacity;
+      animation-name: confettiFall, confettiRotate;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    @keyframes confettiFall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+    @keyframes confettiRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
-    .popup.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .popup-content {
-      background: #fff;
-      color: #333;
-      padding: 20px;
-      border-radius: 15px;
-      max-width: 500px;
-      text-align: center;
-      animation: popUp 0.5s ease;
-    }
-
-    @keyframes popUp {
-      from { transform: scale(0.7); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .close {
-      margin-top: 15px;
-      display: inline-block;
-      padding: 6px 14px;
-      background: crimson;
-      color: #fff;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
+    /* Music Player */
     .music-player {
       display: inline-block;
-      background: #ffe0e0;
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      background: #ffe6f0;
+      padding: 25px 40px;
+      border-radius: 40px;
+      box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
+      margin: 40px auto 70px;
+      max-width: 540px;
+      color: #b2224a;
+      user-select: none;
+      font-family: 'Baloo 2', cursive;
+      letter-spacing: 0.03em;
     }
-
     #judul-lagu {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 15px;
-      color: #333;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #b2224a;
+      text-shadow: 0 1px 3px rgba(255,182,193,0.8);
     }
-
-    button {
+    .music-player button {
       background-color: #ff5c77;
       color: white;
       border: none;
-      border-radius: 20px;
-      padding: 10px 20px;
-      margin: 5px;
-      font-size: 14px;
+      border-radius: 40px;
+      padding: 14px 32px;
+      margin: 8px 10px;
+      font-size: 1.1rem;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
+      font-weight: 700;
+      box-shadow: 0 6px 18px rgba(255, 92, 119, 0.7);
+      user-select: none;
+      font-family: 'Baloo 2', cursive;
     }
-
-    button:hover {
+    .music-player button:hover {
       background-color: #e14b66;
+      box-shadow: 0 8px 25px rgba(225, 75, 102, 0.9);
     }
 
+    /* Cake */
     .cake {
       position: relative;
-      width: 150px;
-      height: 100px;
-      background: #ff6f91;
-      margin: 50px auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 200px;
+      height: 130px;
+      background: linear-gradient(135deg, #ff6f91, #ff4d6d);
+      margin: 60px auto 50px;
+      border-radius: 25px;
+      box-shadow: 0 12px 35px rgba(255, 77, 109, 0.6);
+      user-select: none;
     }
-
     .candle {
       position: absolute;
-      top: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 15px;
-      height: 60px;
-      background: #fff;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .flame {
-      position: absolute;
-      top: -25px;
+      top: -75px;
       left: 50%;
       transform: translateX(-50%);
       width: 20px;
-      height: 30px;
-      background: radial-gradient(circle, yellow 40%, orange 70%, transparent 100%);
-      border-radius: 50%;
-      animation: flicker 0.3s infinite alternate;
+      height: 75px;
+      background: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+      filter: drop-shadow(0 0 5px #ffb347);
+      transition: filter 0.3s ease;
     }
-
+    .candle:hover {
+      filter: drop-shadow(0 0 18px #ffd966);
+    }
+    .flame {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 40px;
+      background: radial-gradient(circle at 50% 50%, #fff176 40%, #ffb347 75%, transparent 100%);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: flicker 0.4s infinite alternate ease-in-out;
+      filter: drop-shadow(0 0 8px #ffd966);
+      pointer-events: none;
+      user-select: none;
+      box-shadow: 0 0 12px #fff176;
+    }
     @keyframes flicker {
-      from { transform: translateX(-50%) scale(1); }
-      to { transform: translateX(-50%) scale(1.1); }
+      0% { transform: translateX(-50%) scale(1); opacity: 1; }
+      100% { transform: translateX(-50%) scale(1.2); opacity: 0.85; }
     }
 
+    /* Message */
     .message {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #333;
+      margin-top: 25px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #b2224a;
       display: none;
+      user-select: none;
+      font-family: 'Baloo 2', cursive;
+    }
+
+    /* Dark mode toggle */
+    #darkToggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ff4d6d;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(255, 77, 109, 0)
     }
   </style>
 </head>
 <body class="dark">
+  <button id="darkToggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode">🌙</button>
+
   <h1 id="title">🔒...</h1>
   <p id="subtitle" class="subtitle">Tunggu hari itu tiba...</p>
 
   <!-- Countdown -->
-  <div id="countdown"></div>
+  <div id="countdown" aria-live="polite" aria-atomic="true"></div>
 
   <!-- Konten Hadiah (hanya muncul di 23 September) -->
   <div id="content" style="display:none;">
     <h1>🎉 METT ULTAAHHH, Alya Al-Khalifi Wulandari! 🎂</h1>
     <p class="subtitle">Ultahh yaaa XD ✨</p>
 
-    <a class="button" onclick="showCard()">Buka Surat Ucapan</a>
-    <a class="button" onclick="startGame()">Mainkan Balon 🎈</a>
-    <a class="button" onclick="showGift()">Buka Kado 🎁</a>
+    <a class="button" href="javascript:void(0)" onclick="showCard()" role="button" aria-pressed="false">Buka Surat Ucapan</a>
+    <a class="button" href="javascript:void(0)" onclick="startGame()" role="button" aria-pressed="false">Mainkan Balon 🎈</a>
+    <a class="button" href="javascript:void(0)" onclick="showGift()" role="button" aria-pressed="false">Buka Kado 🎁</a>
 
     <!-- Audio dari folder -->
-    <div class="music-player">
-    <div id="judul-lagu">Tidak ada lagu yang diputar</div>
-    <button onclick="playSong('song/perfect.mp3', 'Perfect - Ed Sheeran')">▶ Lagu 1</button>
-    <button onclick="playSong('song/jadianyuk.mp3', 'Jadian Yuk - Chloe Pawapua')">▶ Lagu 2</button>
-    <button onclick="playSong('song/Until.mp3', 'Until I Found You - Stephen Sanchez')">▶ Lagu 3</button>
-    <button onclick="playSong('lagu3.mp3', 'Mati')">▶ Hentikan Lagu</button>
-    </div>
 
-  <audio id="audio-player" controls style="display:none;"></audio>
+  <!-- Audio dari folder -->
+  <div class="music-player">
+  <div id="judul-lagu">Tidak ada lagu yang diputar</div>
+  <button onclick="playSong('song/perfect.mp3', 'Perfect - Ed Sheeran')">▶ Lagu 1</button>
+  <button onclick="playSong('song/Pandangan.mp3', 'Pandangan pertama - RAN')">▶ Lagu 2</button>
+  <button onclick="playSong('song/Until.mp3', 'Until I Found You - Stephen Sanchez')">▶ Lagu 3</button>
+  <button onclick="playSong('lagu3.mp3', 'Mati')">▶ Hentikan Lagu</button>
+</div>
+
+    <audio id="audio-player" controls style="display:none;"></audio>
 
     <!-- Surat -->
-    <div id="card" class="card">
+    <div id="card" class="card" role="region" aria-label="Surat Ucapan">
       <h2>Ucapan</h2>
       <p>
-        HAABEEEDEEE MELLL 🥳🥳
-        YAHAHAHA TUA :3  😂
-        PANJANG UMUR YAAA, SEHATT SELALUU, MOGA MAKIN CANTIK, IMUT, SOLEHAH, PNTER, SUKSES, SAYANG AMA ORANG TUAAA 
-        sowwii kalau aku ada salah atau kata-kata yang bikin kamu sakit hati.
-        trus jangan sakit-sakitan trus, ntar aku khawatir
-        ntar lah kalo ada duit aku beliin susu coklat lagi :3.
-        <br>
-        <br>
-        -Fajri
+        HAABEEEDEEE YANGGG 🥳🥳<br />
+        YAHAHAHA TUA :3 😂<br />
+        PANJANG UMUR YAAA, SEHATT SELALUU, MOGA MAKIN CANTIK, IMUT, SOLEHAH, PNTER, SUKSES, SAYANG AMA ORANG TUAAA<br />
+        sowwii kalau aku ada salah atau kata-kata yang bikin kamu sakit hati.<br />
+        trus jangan sakit-sakitan trus, ntar aku khawatir<br />
+        ntar lah kalo ada duit aku beliin susu coklat lagi :3. (kangen btw)<br /><br />
+        -Fajri<br /><br />
         <br>
         <br>
         Selamat ulang tahun, Alya 🎉🥳 Semoga panjang umur, sehat selalu, dan makin sukses 
@@ -338,9 +516,7 @@
     <div id="giftMessage" style="display:none; font-size:1.4rem; margin-top:20px; background:white; padding:20px; border-radius:15px; max-width:500px; margin-left:auto; margin-right:auto;">
       Kado?  
       <br>
-      kasih liat fajri kalimat ini:
-      <br>
-      "47 61 6E 63 69 6E 79 61 20 6D 61 6E 61 20 69 6D 75 74 74" 
+      Tanya fajri XD
     </div>
   </div>
 
@@ -352,19 +528,14 @@
   <div class="popup" id="popup">
     <div class="popup-content">
       <h2> Cius (jujur)</h2>
-      <p>uy yaa, kalo kamu ngeliat aku sering murung mulu <br>
-      itu bisa aja jeles atau lagi ga enak badan (serius ini mah)
-      trus juga emang dari lama ga enak aja kalo kita statusnya bestie soalnya 
-      sering ovt trus kalo kamu bakal ama yang lain gara-gara aku ada kurang, <br>
-      trus juga susah banget buat itu soalnya kita udah janji (kayaknya) kalo 
-      kelas 12 aku mau serius. trus juga ada yang nanyain "emang kamu sama si alya 
-      mau bestian terus??" cewe btw, aku juga aga gimana gitu. tapi dari cara kamu <br>
-      di sekolah atau diluar, masih kayak nerima aku juga. aku malahan setuju sama 
-      lega aja. sering juga sih, aku ovt gitu mau di sekolah, kerkom, sama di rumah 
-      gara gara itu. takutnya kamu diambil gara gara status kita besti. 
-      maaf kalo misal aku ada kurang trus bakal aku tingkatin biar aku bisa deket
-      sama kamu, moga bisa dimengerti yaa <br>
-      . HBD comell :D
+      <p>uy yaa, maaf ya aku banyak kurangnya jadi pacar soalnya bener aku ga pernah pacaran tapi kamu juga ga pernah ;-; <br>
+        cuma ya aku kalo mau ngelakuin aksi gitu harus mikir dua kali dulu misal yang mau post fotbar kita juga aku mikir dua kali dulu <br>
+        kebanyakannya itu takut risih kamunya. trus juga sebenernya aku mau telponan gitu sama kamu mau sleep call atau mau cerita. pengen banget <br>
+        pengen banget ngobrol gitu kalo disekolah juga lebih ke risih terus takutnya kamu malu gitu sama temen temen kamu dikira aneh aneh. <br>
+        trus juga aku punya trauma gitu sama hubungan (udah lama btw) aku takutnya dikira cowo toxic gitu plus dikira stalker ;-; cuma ya itu pikiran <br>
+        yang bikin aku ovt, tapi kalo sekarang mungkin udah engga mikir kesitu lagi jadi aku udah seger juga pikiran. <br> 
+        tapi aku coba ngerubah biar aku anggep kamu pacar aku (beneran) yang kamu pengen plus ga pendiam (inshaallah). <br> 
+        anyways HBD SAYANGG:D
       <br>
       -Landak</p>
       <div class="close" id="closeBtn">Tutup</div>
@@ -405,7 +576,7 @@
     }
 
     // Countdown & Switch Tema
-    const targetDate = new Date("September 23, 2025 00:00:00").getTime();
+    const targetDate = new Date("September 2, 2025 00:00:00").getTime();
     const countdown = document.getElementById("countdown");
     const content = document.getElementById("content");
     const title = document.getElementById("title");
@@ -419,7 +590,7 @@
         // Ulang Tahun: ubah tema ke ceria
         document.body.classList.remove("dark");
         document.body.classList.add("birthday");
-        countdown.innerHTML = "🎂 Hari ini ulang tahunmu! 🎉";
+        countdown.innerHTML = "🎂 HABEDEE! 🎉";
         content.style.display = "block";
         if (title) title.style.display = "none";
         if (subtitle) subtitle.style.display = "none";
@@ -458,16 +629,17 @@
     // kata kata //
 
     const quotes = [
-    "Ga butuh kata-kata, senyuman si comel aja udah puas",
+    "Ga butuh kata-kata, senyuman si kesayangan aja udah puas",
     "Tau lagu 'I say little pray for you?', lagu itu menceritakan tentang aku mengucapkan sedikit doa untuk kita bisa bertemu",
     "Suka suka lo deh, eh tapi emang suka :3",
     "bukan muji, tapi hari ini kamu imut dehh",
-    "ALYA = As Long You Awesome, i like it :)",
+    "ALYA = As Long You Awesome, i love it :)",
     "Jujur males sekolahh, tapi gapapa kalau kamu masuk jadi ga males",
     "Aku lebih suka Waktu Indonesia Timur, karena i want to be WIT you",
     "Hidup itu ambil fun aja, tapi kalo aku mending ambil kamu",
-    "Yang baca ini moga comell, EHH UPSS",
-    "Di bahasa inggris, He's itu he is, She's itu she is, They're itu they are, kalo You're itu punyaku"
+    "Yang baca ini moga imutt, EHH UPSS",
+    "Di bahasa inggris, He's itu he is, She's itu she is, They're itu they are, kalo You're itu punyaku",
+    "Be Yourself and Never Forget Be Mine :3" 
   ];
 
   function generateQuote() {
@@ -487,5 +659,3 @@
   </script>
 </body>
 </html>
-
-
