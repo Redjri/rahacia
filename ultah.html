@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HABEDEE YANGG</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+  <style>
+ 
+  </style>
+</head>
+<body >
+
+  <!-- Konten Hadiah (hanya muncul di 23 September) -->
+  <div id="content">
+    <div class="balloon" style="left: 15%; animation-delay: 1s;"></div>
+    <div class="balloon" style="left: 40%; animation-delay: 0.1s;"></div>
+    <div class="balloon" style="left: 70%; animation-delay: 0.3s;"></div>
+    <div class="balloon" style="left: 20%; animation-delay: 0.5s;"></div>
+    <div class="balloon" style="left: 35%; animation-delay: 2s;"></div>
+    <div class="balloon" style="left: 63%; animation-delay: 3s;"></div>
+    <h1>🎉 METT ULTAAHHH, Alya Al-Khalifi Wulandari! 🎂🥳🥳</h1>
+    <p class="subtitle">Ultahh yaaa 😂😂✨</p>
+    <a class="button" href="javascript:void(0)" onclick="showCard()" role="button" aria-pressed="false">Buka Surat Ucapan</a>
+    <!-- Tombol -->
+    <a class="button" href="javascript:void(0)" onclick="showGift()" role="button" aria-pressed="false">
+      Buka Kado 🎁
+    </a>
+    <!-- Tambahkan tombol di bagian tombol hadiah -->
+    <a class="button" href="javascript:void(0)" onclick="showGallery()" role="button">📸 Galeri</a>
+
+  <!-- Galeri foto (popup) -->
+  <div id="galleryModal" class="gallery-modal">
+    <div class="gallery-content">
+      <span class="close-btn" onclick="closeGallery()">&times;</span>
+      <h2>📸 Galeri</h2>
+      <div class="gallery-grid">
+        <img src="img/alya5.jpg" alt="Foto 1">
+        <img src="img/alya4.jpg" alt="Foto 2">
+        <img src="img/alya1.png" alt="Foto 3">
+        <img src="img/alya2.png" alt="Foto 4">
+        <img src="img/alya6.png" alt="Foto 5">
+        <img src="img/alya7.png" alt="Foto 6">
+        <img src="img/alya8.jpg" alt="Foto 7">
+        <img src="img/alya9.jpg" alt="Foto 8">
+        <img src="img/alya3.png" alt="Foto 9">
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio dari folder -->
+  <div class="music-player">
+  <div id="judul-lagu">Tidak ada lagu yang diputar</div>
+  <button onclick="playSong('song/perfect.mp3', 'Perfect - Ed Sheeran')">▶ Lagu 1</button>
+  <button onclick="playSong('song/Pandangan.mp3', 'Pandangan pertama - RAN')">▶ Lagu 2</button>
+  <button onclick="playSong('song/Until.mp3', 'Until I Found You - Stephen Sanchez')">▶ Lagu 3</button>
+  <button onclick="playSong('song/CeritaCinta.mp3', 'Cerita Cinta - Arsy Widianto')">▶ Lagu 4</button>
+  <button onclick="playSong('song/CInta.mp3', 'Cinta - Chrisye')">▶ Lagu 5</button>
+  <button onclick="playSong('lagu3.mp3', 'Mati')">▶ Hentikan Lagu</button>
+
+  <div class=" button">
+    <h2>💡 Kata-kata :3</h2>
+    <p id="quote">-</p>
+    <button onclick="generateQuote()">Klik disini</button>
+    </div>
+  </div>
+
+    <audio id="audio-player" controls style="display:none;"></audio>
+
+    <!-- Surat -->
+    <div id="card" class="card" role="region" aria-label="Surat Ucapan">
+      <h2>Ucapan</h2>
+      <p>
+        HAABEEEDEEE YANGGG 🥳🥳
+        YAHAHAHA TUA :3 😂
+        PANJANG UMUR YAAA, SEHATT SELALUU, MOGA MAKIN CANTIK, IMUT, SOLEHAH, PNTER, SUKSES, SAYANG AMA ORANG TUAAA
+        sowwii kalau aku ada salah atau kata-kata yang bikin kamu sakit hati.
+        trus jangan sakit-sakitan trus, ntar aku khawatir.
+        ntar lah kalo ada duit aku beliin susu coklat lagi :3. (kangen btw)
+        -Fajri
+        <br>
+        Selamat ulang tahun, Alya 🎉🥳 Semoga panjang umur, sehat selalu, dan makin sukses 
+        dalam segala hal (ucapan langsung dari ketua lohh 😎😎). Terus semoga betah menjadi 
+        wakil juga kalau bisa bantuan ketua juga yak hahay, Wish you all the best 🔥.
+        -keanu
+        <br>
+        happy birthday bitjh hope your future be the best of the best bitjh and wish we wont go apart bitjh
+        -Mirza
+      </p>
+    </div>
+
+    <!-- Gift -->
+    <div id="gift" class="gift" onclick="revealGift()">🎁</div>
+      <div id="giftMessage" style="display:none; font-size:1.4rem; margin-top:20px; background:white; padding:20px; border-radius:15px; max-width:500px; margin-left:auto; margin-right:auto;">
+        Kado?  
+        <br>
+        Tanya fajri XD
+      </div>
+    </div>
+  
+  <!-- <audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"></audio> -->
+  <!-- <div id="secretBtn">❤️</div>
+
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2> Cius (jujur)</h2>
+      <p>uy yaa, maaf ya aku banyak kurangnya jadi pacar soalnya bener aku ga pernah pacaran tapi kamu juga ga pernah ;-; <br>
+        cuma ya aku kalo mau ngelakuin aksi gitu harus mikir dua kali dulu misal yang mau post fotbar kita juga aku mikir dua kali dulu <br>
+        kebanyakannya itu takut risih kamunya. trus juga sebenernya aku mau telponan gitu sama kamu mau sleep call atau mau cerita. pengen banget <br>
+        pengen banget ngobrol gitu kalo disekolah juga lebih ke risih terus takutnya kamu malu gitu sama temen temen kamu dikira aneh aneh. <br>
+        trus juga aku punya trauma gitu sama hubungan (udah lama btw) aku takutnya dikira cowo toxic gitu plus dikira stalker ;-; cuma ya itu pikiran <br>
+        yang bikin aku ovt, tapi kalo sekarang mungkin udah engga mikir kesitu lagi jadi aku udah seger juga pikiran. (ada alasan lain juga)<br> 
+        tapi aku coba ngerubah biar aku anggep kamu pacar aku (beneran) yang kamu pengen plus ga pendiam (inshaallah).<br> 
+        anyways HBD SAYANGG:D
+      <br>
+      -bocah ingusan</p>
+      <div class="close" id="closeBtn">Tutup</div>
+    </div>
+  </div> -->
+
+</body>
+</html>
