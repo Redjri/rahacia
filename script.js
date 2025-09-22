@@ -15,24 +15,24 @@ function revealGift() {
     document.getElementById("giftMessage").style.display = "block";
 }
 
-// const secretBtn = document.getElementById("secretBtn");
-// const popup = document.getElementById("popup");
-// const closeBtn = document.getElementById("closeBtn");
+const secretBtn = document.getElementById("secretBtn");
+const popup = document.getElementById("popup");
+const closeBtn = document.getElementById("closeBtn");
 
-// secretBtn.addEventListener("click", () => {
-//   popup.classList.add("active");
-// });
+secretBtn.addEventListener("click", () => {
+  popup.classList.add("active");
+});
 
-// closeBtn.addEventListener("click", () => {
-//   popup.classList.remove("active");
-// });
+closeBtn.addEventListener("click", () => {
+  popup.classList.remove("active");
+});
 
-// // Tutup popup kalau klik luar konten
-// popup.addEventListener("click", (e) => {
-//   if (e.target === popup) {
-//     popup.classList.remove("active");
-//   }
-// });
+// Tutup popup kalau klik luar konten
+popup.addEventListener("click", (e) => {
+  if (e.target === popup) {
+    popup.classList.remove("active");
+  }
+});
 
 function showGallery() {
 document.getElementById("galleryModal").style.display = "block";
@@ -72,3 +72,4 @@ function generateQuote() {
 //     judulLagu.textContent = "Sedang diputar: " + title;
 
 // }
+
