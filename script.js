@@ -62,12 +62,13 @@ function generateQuote() {
     document.getElementById("quote").innerText = quotes[random];
 } 
 
-//   Lagu //
-const audioPlayer = document.getElementById("audio-player");
-const judulLagu = document.getElementById("judul-lagu");
+// //   Lagu //
+// const audioPlayer = document.getElementById("audio-player");
+// const judulLagu = document.getElementById("judul-lagu");
 
-function playSong(file, title) {
-    audioPlayer.src = file;
-    audioPlayer.play();
-    judulLagu.textContent = "Sedang diputar: " + title;
-}
+// function playSong(file, title) {
+//     audioPlayer.src = file;
+//     audioPlayer.play();
+//     judulLagu.textContent = "Sedang diputar: " + title;
+
+// }
